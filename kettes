@@ -1,0 +1,43 @@
+from os import system
+from random import randrange
+system("cls")
+
+jatékban_van = False 
+talalgatasokSzama = 5
+generealtSzam = randrange(101, 150)
+
+
+def talalgat(elem):
+    global jatékban_van
+
+    if elem != generealtSzam:
+        if elem < generealtSzam:
+            print("Kisebb számot adtál meg!")
+        else:
+            print("Nagyobb számot adtál meg!")
+    else:
+        jatékban_van = True
+        print("Egy találatos szelvény!")
+
+while talalgatasokSzama > 0:
+    valtozo = input("Találd ki a számot: ")
+    
+    try:
+        szamlalo = int(valtozo)
+
+        if szamlalo < 101 or szamlalo > 150:
+            print("Tartományon kívül vagy!")
+            talalgatasokSzama = talalgatasokSzama - 2
+        else:
+            talalgat(szamlalo)
+            talalgatasokSzama = talalgatasokSzama - 1
+
+        if talalgatasokSzama == 0:
+            print("0 találatos szelvény!")
+            quit(1)
+
+        if jatékban_van:
+            quit(1)
+    except Exception:
+        print("Nem számot adtál meg!")
+        talalgatasokSzama = talalgatasokSzama - 2
